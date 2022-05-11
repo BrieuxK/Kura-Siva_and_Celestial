@@ -1,3 +1,5 @@
+#Courbe passant par les différentes valeurs de longueur critiques, déterminées pour des viscosités différentes.
+
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.optimize as opt;
