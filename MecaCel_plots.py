@@ -1,5 +1,8 @@
-import time
-start_time = time.time()
+#Résultats de "Méca Céleste", pour changer le temps d'intégration ou pas de temps : lignes 13 & 14
+#                             pour changer le nombre de corps ou de méthode : ligne 56
+
+#import time
+#start_time = time.time()
 import numpy as np
 import matplotlib.pyplot as plt
 import MecaCel_main as m
@@ -53,7 +56,7 @@ def resultat(methode, corps, masses):
 finalq, finalp, methode, masses_new = resultat(3, 3, masses)
 #Premier argument => méthode : euler avant = 0, Heun = 1, RK4 = 2 et SV = 3
 #Deuxieme argument => corps : 2 corps min. et 3 corps max.
-#Troisieme argument => liste des masses des objets : onp eut laisser "masses" dans tous les cas de figures
+#Troisieme argument => liste des masses des objets : on laisse "masses" dans tous les cas de figures
 #------------------------------Energie---------------------------------------
 """
 en = m.Energy(finalq, finalp, k, n_k,masses_new)
@@ -99,4 +102,4 @@ ax.set_zlabel('z',fontsize = 15)
 plt.legend(loc='upper left')
 plt.title('Orbite (ua)')
 plt.show()
-print("--- %s seconds ---" % (time.time() - start_time))
+#print("--- %s seconds ---" % (time.time() - start_time))
