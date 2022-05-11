@@ -1,4 +1,6 @@
-import matplotlib
+Animation pour 6 corps
+
+#import matplotlib
 #matplotlib.use("Agg")
 import numpy as np
 import matplotlib.pyplot as plt
@@ -25,31 +27,6 @@ def dq(pos, imp):
         zq[j+2] = imp[j+2]/masses[i]
     return zq
 
-def dq1(param_pos, param_imp): #Explose dés la 1ère itération
-    """
-    param_pos = array : [qX1,qY1,qZ1,qX2,qY2,qZ2,qX3,qY3,qZ3] 3premiers : Soleil, 3suivants Jupiter, 3 derniers Saturne
-    param_imp = array : [pX1,pY1,pZ1,pX2,pY2,pZ2,pX3,pY3,pZ3] 3premiers : Soleil, 3suivants Jupiter, 3 derniers Saturne
-
-    """
-    zq = np.zeros(3*len(masses))
-    zq[0] = param_imp[0]/masses[0]
-    zq[1] = param_imp[1]/masses[0]
-    zq[2] = param_imp[2]/masses[0]
-    zq[3] = param_imp[3]/masses[1]
-    zq[4] = param_imp[4]/masses[1]
-    zq[5] = param_imp[5]/masses[1]
-    zq[6] = param_imp[6]/masses[2]
-    zq[7] = param_imp[7]/masses[2]
-    zq[8] = param_imp[8]/masses[2]
-    zq[9] = param_imp[9]/masses[3]
-    zq[10] = param_imp[10]/masses[3]
-    zq[11] = param_imp[11]/masses[3]
-    """
-    zq : array des dq/dt longeur 6 
-    """
-    #print(zq)
-    return zq
-
 def dp(param_pos,param_imp):
     zp = np.zeros(len(param_pos))
     for i in range(len(masses)):
@@ -61,27 +38,6 @@ def dp(param_pos,param_imp):
                 zp[j+1]+= -2*((G*masses[i]*masses[m])/distance([param_pos[j],param_pos[j+1],param_pos[j+2]], [param_pos[n],param_pos[n+1],param_pos[n+2]])**3) * (param_pos[j+1]-param_pos[n+1])
                 zp[j+2]+= -2*((G*masses[i]*masses[m])/distance([param_pos[j],param_pos[j+1],param_pos[j+2]], [param_pos[n],param_pos[n+1],param_pos[n+2]])**3) * (param_pos[j+2]-param_pos[n+2])
     return zp*0.5
-
-def dp1(param_pos, param_imp): #On divise par distance XYZ
-    zp = np.zeros(len(param_pos))
-    
-    zp[0] = -2*(((G*masses[0]*masses[1])/distance(param_pos[:3],param_pos[3:6])**3) * (param_pos[0] - param_pos[3])) - 2*(((G*masses[0]*masses[2])/distance(param_pos[:3],param_pos[6:])**3) * (param_pos[0] - param_pos[6]))#Marqueur 
-    zp[1] = -2*(((G*masses[0]*masses[1])/distance(param_pos[:3],param_pos[3:6])**3) * (param_pos[1] - param_pos[4])) - 2*(((G*masses[0]*masses[2])/distance(param_pos[:3],param_pos[6:])**3) * (param_pos[1] - param_pos[7]))
-    zp[2] = -2*(((G*masses[0]*masses[1])/distance(param_pos[:3],param_pos[3:6])**3) * (param_pos[2] - param_pos[5])) - 2*(((G*masses[0]*masses[2])/distance(param_pos[:3],param_pos[6:])**3) * (param_pos[2] - param_pos[8]))
-    
-    zp[3] = -2*(((G*masses[0]*masses[1])/distance(param_pos[:3],param_pos[3:6])**3) * (param_pos[3] - param_pos[0])) - 2*(((G*masses[1]*masses[2])/distance(param_pos[3:6],param_pos[6:])**3) * (param_pos[3] - param_pos[6]))
-    zp[4] = -2*(((G*masses[0]*masses[1])/distance(param_pos[:3],param_pos[3:6])**3) * (param_pos[4] - param_pos[1])) - 2*(((G*masses[1]*masses[2])/distance(param_pos[3:6],param_pos[6:])**3) * (param_pos[4] - param_pos[7]))
-    zp[5] = -2*(((G*masses[0]*masses[1])/distance(param_pos[:3],param_pos[3:6])**3) * (param_pos[5] - param_pos[2])) - 2*(((G*masses[1]*masses[2])/distance(param_pos[3:6],param_pos[6:])**3) * (param_pos[5] - param_pos[8]))
-    
-    zp[6] = -2*(((G*masses[2]*masses[0])/distance(param_pos[6:],param_pos[:3])**3) * (param_pos[6] - param_pos[0])) - 2*(((G*masses[1]*masses[2])/distance(param_pos[3:6],param_pos[6:])**3) * (param_pos[6] - param_pos[3]))
-    zp[7] = -2*(((G*masses[2]*masses[0])/distance(param_pos[6:],param_pos[:3])**3) * (param_pos[7] - param_pos[1])) - 2*(((G*masses[1]*masses[2])/distance(param_pos[3:6],param_pos[6:])**3) * (param_pos[7] - param_pos[4]))
-    zp[8] = -2*(((G*masses[2]*masses[0])/distance(param_pos[6:],param_pos[:3])**3) * (param_pos[8] - param_pos[2])) - 2*(((G*masses[1]*masses[2])/distance(param_pos[3:6],param_pos[6:])**3) * (param_pos[8] - param_pos[5]))
-    
-    """
-    zp : array des dp/dt longueur 9
-    """
-    #print(zp)
-    return zp
 
 def distance(pos1, pos2):
     """
@@ -181,12 +137,9 @@ p_Heun = np.zeros((n_k, len(masses) * 3))
 q_Heun[0] = np.array([0, 0, 0,4.6580839119399,-1.7945574704081,-0.0967627432056,6.9600794880566,-7.0666123077577,-0.1541266614081,14.3976311704513,13.4787169790607,-0.1365126314185,29.6332690545131,-4.0906211648238,-0.5987300140204,-0.8667639099172,-1.2688302938551,-0.0053301505428])
 p_Heun[0] = np.array([0, 0, 0,0.0026255239604*masses[1],0.0074041879836*masses[1],-0.0000894925649*masses[1],0.0036673089657*masses[2],0.0039101598352*masses[2],-0.0002138877692*masses[2],-0.0027147204414*masses[3],0.0026953325910*masses[3],0.0000450465708*masses[3],0.0004116004817*masses[4],0.0031367475513*masses[4],-0.0000739746349*masses[4],0.0120799162865*masses[5],-0.0066939413795*masses[5],-0.0004366085907*masses[5]])
 
-
-##Neptune OK
-
-finalq, finalp = RK4_new(q_Heun,p_Heun)
-#finalq, finalp = Heun(q_Heun, p_Heun)
-
+#--------------------------------------------Simulation-----------------------------------------------------
+finalq, finalp = RK4_new(q_Heun,p_Heun) #eula : Euler avant, Heun : Heun, RK4_new : RK4, SV = Størmer-Verlet
+#-----------------------------------------------------------------------------------------------------------
 fig = plt.figure(figsize=plt.figaspect(0.5))
 ax = fig.add_subplot(1, 2, 1, projection='3d')
 
