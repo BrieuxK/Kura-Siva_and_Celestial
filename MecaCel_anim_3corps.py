@@ -1,5 +1,7 @@
-import matplotlib
-matplotlib.use("Agg")
+#Animation 3 corps pour une méthode, temps d'intégration et pas de temps donnés.
+
+#import matplotlib
+#matplotlib.use("Agg")
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import animation
@@ -14,7 +16,7 @@ masses = [1, 0.000954786104043, 0.0002857214681]
 
 q_Heun, p_Heun = m.start3(n_k,masses)
 
-finalq, finalp = m.SV(q_Heun, p_Heun, k, n_k,masses)
+finalq, finalp = m.SV(q_Heun, p_Heun, k, n_k,masses) #m.eula : Euler avant, m.Heun : Heun, m.RK4_new : RK4, m.SV = Størmer-Verlet
 
 fig = plt.figure(figsize=plt.figaspect(0.5))
 ax = fig.add_subplot(1, 1, 1, projection='3d')
@@ -69,6 +71,6 @@ ax.set_zlim3d([-1, 1])
 
 ax.plot(0, 0, marker = 'o', markersize=15, color="yellow")
 ani=animation.FuncAnimation(fig, update_points, frames=n_k//3, fargs=(x, y, z, points, dots, line1, line2))
-writergif = animation.PillowWriter(fps=15)
-ani.save('3corpsSV.gif',writer=writergif,progress_callback=lambda i, n: print(f'Saving frame {i} of {n}'))
+#writergif = animation.PillowWriter(fps=15)
+#ani.save('3corpsSV.gif',writer=writergif,progress_callback=lambda i, n: print(f'Saving frame {i} of {n}'))
 plt.show()
