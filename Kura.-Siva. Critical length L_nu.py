@@ -1,3 +1,5 @@
+#Diagramme de la longueur critique en fonction de L pour une viscosité donnée.
+
 import numpy as np
 import matplotlib.pyplot as plt
 
