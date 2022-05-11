@@ -1,3 +1,6 @@
+#Fichier principal pour Méca Céleste, rien à modifier ici.
+#On importe ces méthodes dans "MecaCel_plots"
+
 import numpy as np
 
 
