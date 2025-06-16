@@ -1,4 +1,3 @@
-# LPHYS1303-Examen
-Projets "Mécanique céleste" et "Kuramoto-Sivashinsky equation" de Van Bastelaere Chloé et Kaczmarczyk Brieux
+# Celestial mechanics and Kuramoto-Sivashinsky equations
 
-Pour le projet "Mécanique Céleste", les résultats sont obtenus à partir du fichier "MecaCel_plot.py".
+Simulation of the Sun, Jupiter, Saturn, Uranus and Neptune for 5000 years under different methods (standard or symplectic)
